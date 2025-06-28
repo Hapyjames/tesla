@@ -6,6 +6,7 @@
   <title>Optimus Humanoid Robot - Tesla Inspired</title>
   <link href="https://fonts.googleapis.com/css?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <style>
     :root {
       --main-bg: #101114;
@@ -76,7 +77,7 @@
       font-size: 1.15em;
       text-decoration: none;
       position: relative;
-      padding: 6px 12px;
+      padding: 6px 1px;
       transition: color 0.2s;
       cursor: pointer;
     }
@@ -104,7 +105,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-left: 30px;
+      margin-left: 10px;
     }
     .nav-auth-btn {
       background: linear-gradient(90deg, var(--robot-glow) 70%, #fff2 100%);
@@ -130,6 +131,87 @@
       margin-left: 10px;
       letter-spacing: 0.03em;
       text-shadow: 0 1px 6px #00ffe744;
+    }
+    /* Dropdown menu */
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .nav-dropdown-btn {
+      background: none;
+      border: none;
+      color: #00ffe7;
+      font-size: 1.6em;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .nav-dropdown-btn:hover, .nav-dropdown-btn.active {
+      background: #00ffe715;
+      color: #fff;
+    }
+    .nav-dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 110%;
+      min-width: 160px;
+      background: #14161a;
+      box-shadow: 0 6px 18px #00ffe755;
+      border-radius: 9px;
+      z-index: 99;
+      animation: fadeInMenu 0.32s cubic-bezier(.45,.05,.55,1.23);
+      overflow: hidden;
+    }
+    .nav-dropdown-content.show {
+      display: block;
+    }
+    .nav-dropdown-link {
+      color: #00ffe7;
+      padding: 13px 22px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 1.05em;
+      cursor: pointer;
+      transition: background 0.16s, color 0.15s, padding-left 0.18s;
+      width: 100%;
+      text-align: left;
+    }
+    .nav-dropdown-link:hover {
+      background: #00ffe71a;
+      color: #fff;
+      padding-left: 30px;
+    }
+    @keyframes fadeInMenu {
+      from { opacity: 0; transform: translateY(-10px) scale(0.96);}
+      to { opacity: 1; transform: translateY(0) scale(1);}
+    }
+    /* Login/Signup dropdowns */
+    .auth-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .auth-dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 110%;
+      min-width: 200px;
+      background: #14161a;
+      box-shadow: 0 6px 18px #00ffe755;
+      border-radius: 9px;
+      z-index: 99;
+      animation: fadeInMenu 0.32s cubic-bezier(.45,.05,.55,1.23);
+      overflow: hidden;
+    }
+    .auth-dropdown-content.show {
+      display: block;
     }
     /* MAIN WRAPPER */
     .page-wrapper {
@@ -203,6 +285,17 @@
       margin-bottom: 6px;
       letter-spacing: 0.03em;
       line-height: 1.2;
+    }
+    .typing-text {
+      border-right: 3px solid var(--robot-glow);
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      animation: blinkCursor 0.7s infinite;
+    }
+    @keyframes blinkCursor {
+      from { border-right-color: var(--robot-glow); }
+      to { border-right-color: transparent; }
     }
     .hero-desc {
       color: #b0b0b0;
@@ -542,20 +635,57 @@
       flex-direction: column;
       gap: 14px;
       max-width: 420px;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
-      /* Center horizontally */
     }
     #contact .section-title {
       text-align: center;
     }
     #contact .contact-form {
       align-items: center;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 2px solid #282b2f;
+      background: #181c22;
+      color: #fff;
+      font-family: inherit;
+      font-size: 1em;
+      outline: none;
+      transition: all 0.25s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--robot-glow);
+      box-shadow: 0 0 0 3px rgba(0, 255, 231, 0.2);
+    }
+    .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .contact-form button {
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--robot-glow) 60%, #fff2 100%);
+      color: #000;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 10px;
       width: 100%;
     }
-    #contact .contact-form > * {
-      width: 100%;
-      max-width: 420px;
+    .contact-form button:hover {
+      background: linear-gradient(90deg, #fff 80%, var(--robot-glow) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 231, 0.4);
     }
     .contact-status {
       margin-top: 6px;
@@ -734,6 +864,8 @@
       .hero-right { align-items: center; justify-content: center; padding: 16px 0 18px 0; }
       .robot-svg { height: 140px;}
       .auth-modal { min-width: 0; }
+      .nav-links { display: none; }
+      .nav-dropdown { display: block; }
     }
     @media (max-width: 600px) {
       nav, .nav-inner { height: 48px; }
@@ -751,6 +883,18 @@
       .about-info { font-size: 1em; }
       .tech-card, .team-card { min-width: 120px; }
       .auth-modal { min-width: 0; }
+      .contact-form {
+        padding: 0 10px;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        padding: 10px 12px;
+        font-size: 0.95em;
+      }
+      .contact-form button {
+        padding: 10px;
+        font-size: 1em;
+      }
     }
   </style>
 </head>
@@ -768,12 +912,39 @@
         <a class="nav-link" href="#contact">Contact</a>
       </div>
       <div class="nav-auth-btns" id="navAuthBtns">
-        <button class="nav-auth-btn" id="openSignUpBtn">Sign Up</button>
-        <button class="nav-auth-btn" id="openLoginBtn">Login</button>
+        <div class="auth-dropdown">
+          <button class="nav-auth-btn" id="openSignUpBtn">Sign Up</button>
+          <div class="auth-dropdown-content" id="signupDropdown">
+            <button class="nav-dropdown-link" onclick="openModal('signup')"><i class="fas fa-user-plus"></i> Create Account</button>
+            <button class="nav-dropdown-link" onclick="openModal('signup')"><i class="fas fa-flask"></i> Join Beta</button>
+            <button class="nav-dropdown-link" onclick="openModal('signup')"><i class="fas fa-building"></i> Enterprise</button>
+          </div>
+        </div>
+        <div class="auth-dropdown">
+          <button class="nav-auth-btn" id="openLoginBtn">Login</button>
+          <div class="auth-dropdown-content" id="loginDropdown">
+            <button class="nav-dropdown-link" onclick="openModal('login')"><i class="fas fa-user"></i> User Login</button>
+            <button class="nav-dropdown-link" onclick="openModal('login')"><i class="fas fa-cog"></i> Admin Portal</button>
+            <button class="nav-dropdown-link" onclick="openModal('login')"><i class="fas fa-code"></i> Developer Access</button>
+          </div>
+        </div>
       </div>
       <div class="nav-username" id="navUsername" style="display:none;">
         <span id="navUser"></span>
         <button class="nav-auth-btn" id="logoutBtn" style="margin-left:12px;">Logout</button>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn" id="navDropdownBtn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-dropdown-content" id="navDropdownContent">
+          <button class="nav-dropdown-link" onclick="location.href='#home'"><i class="fas fa-home"></i> Home</button>
+          <button class="nav-dropdown-link" onclick="location.href='#about'"><i class="fas fa-robot"></i> About</button>
+          <button class="nav-dropdown-link" onclick="location.href='#tech'"><i class="fas fa-microchip"></i> Technology</button>
+          <button class="nav-dropdown-link" onclick="location.href='#gallery'"><i class="fas fa-images"></i> Gallery</button>
+          <button class="nav-dropdown-link" onclick="location.href='#team'"><i class="fas fa-users"></i> Team</button>
+          <button class="nav-dropdown-link" onclick="location.href='#contact'"><i class="fas fa-envelope"></i> Contact</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -801,7 +972,7 @@
     <!-- HERO / HOME SECTION -->
     <section id="home" class="visible">
       <div class="hero-left">
-        <div class="hero-title">Optimus<br /> humanoid robot</div>
+        <div class="hero-title"><span class="typing-text" id="typingText"></span></div>
         <div class="hero-desc">
           Tesla introduces Optimus, the revolutionary humanoid robot that redefines the interaction between humans and machines.
         </div>
@@ -963,6 +1134,78 @@
     &copy; 2025 Tesla Optimus. All rights reserved.
   </footer>
   <script>
+    // Typing animation
+    const typingText = document.getElementById('typingText');
+    const text = "OPTIMUS HUMANOID ROBOT";
+    let i = 0;
+    
+    function typeWriter() {
+      if (i < text.length) {
+        typingText.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+      } else {
+        typingText.style.borderRight = 'none';
+      }
+    }
+    
+    // Start typing animation when page loads
+    window.onload = function() {
+      typeWriter();
+    };
+
+    // Dropdown menu toggle with animation/close on outside click
+    const navDropdownBtn = document.getElementById('navDropdownBtn');
+    const navDropdownContent = document.getElementById('navDropdownContent');
+    navDropdownBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navDropdownContent.classList.toggle('show');
+      navDropdownBtn.classList.toggle('active');
+    });
+    window.addEventListener('click', function() {
+      navDropdownContent.classList.remove('show');
+      navDropdownBtn.classList.remove('active');
+    });
+    navDropdownContent.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navDropdownContent.classList.remove('show');
+      navDropdownBtn.classList.remove('active');
+    });
+
+    // Login/Signup dropdowns
+    const openSignUpBtn = document.getElementById('openSignUpBtn');
+    const openLoginBtn = document.getElementById('openLoginBtn');
+    const signupDropdown = document.getElementById('signupDropdown');
+    const loginDropdown = document.getElementById('loginDropdown');
+
+    openSignUpBtn.addEventListener('mouseenter', () => {
+      signupDropdown.classList.add('show');
+    });
+    openSignUpBtn.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        if (!signupDropdown.matches(':hover')) {
+          signupDropdown.classList.remove('show');
+        }
+      }, 200);
+    });
+    signupDropdown.addEventListener('mouseleave', () => {
+      signupDropdown.classList.remove('show');
+    });
+
+    openLoginBtn.addEventListener('mouseenter', () => {
+      loginDropdown.classList.add('show');
+    });
+    openLoginBtn.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        if (!loginDropdown.matches(':hover')) {
+          loginDropdown.classList.remove('show');
+        }
+      }, 200);
+    });
+    loginDropdown.addEventListener('mouseleave', () => {
+      loginDropdown.classList.remove('show');
+    });
+
     // NAVIGATION: Scrollspy and smooth highlight
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = Array.from(document.querySelectorAll('section'));
@@ -1032,8 +1275,6 @@
     // --- AUTH MODAL LOGIC ---
     const modalBg = document.getElementById('modalBg');
     const authModal = document.getElementById('authModal');
-    const openSignUpBtn = document.getElementById('openSignUpBtn');
-    const openLoginBtn = document.getElementById('openLoginBtn');
     const mainSignupBtn = document.getElementById('mainSignupBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const switchAuthBtn = document.getElementById('switchAuthBtn');
@@ -1068,8 +1309,6 @@
       signupStatus.textContent = '';
       loginStatus.textContent = '';
     }
-    openSignUpBtn.onclick = () => openModal('signup');
-    openLoginBtn.onclick = () => openModal('login');
     mainSignupBtn.onclick = () => openModal('signup');
     closeModalBtn.onclick = closeModal;
     modalBg.onclick = (e) => { if (e.target === modalBg) closeModal(); };
